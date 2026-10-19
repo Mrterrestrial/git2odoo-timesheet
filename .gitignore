@@ -1,0 +1,19 @@
+# Personal data created by `timesheet.py init`. Never commit.
+# Odoo credentials
+.env
+# your project, repositories, schedule
+config.toml
+# your role and current focus
+profile.md
+# HR attendance exports
+*.xlsx
+# generated suggestions and logs
+plans/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/

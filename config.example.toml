@@ -1,0 +1,61 @@
+# Copy to config.toml and edit. Secrets go in .env (see .env.example), not here.
+
+[odoo]
+project = "My Project"          # exact name of the Odoo project to log on
+default_task = "Development"    # task used when no rule and no repo default matches (must exist in the project)
+
+[calendar]
+hours_per_day = 8
+start_date = "2026-01-01"       # never look at days before this
+lookback_days = 45              # how far back the weekly check looks for missing days
+holidays = "IT"                 # built-in public holidays: "IT" (Italy) or "" for none
+extra_holidays = []             # e.g. ["2026-12-24"]  (company closing days not in Odoo)
+skip_days = []                  # days never to log even if everything says you worked
+# attendance_file = "Foglio_presenze.xlsx"   # optional: hours per day from the HR export override everything
+# attendance_row = "Presenza effettiva"
+
+[git]
+# author = "Your Name"          # regex passed to `git log --author`; defaults to git global user.name
+[[git.repos]]
+path = "../backend"             # relative to this file, or absolute
+label = "Backend"               # prefix used in descriptions
+default_task = "Development"    # task for this repo's commits when no rule matches
+
+[[git.repos]]
+path = "../frontend"
+label = "Frontend"
+default_task = "Frontend"
+
+# Rules map commit text (subject + body, case-insensitive regex) to an Odoo task. First match wins.
+[[tasks.rules]]
+match = "payment|invoice|billing"
+task = "Billing"
+[[tasks.rules]]
+match = "deploy|docker|ci|monitoring|security"
+task = "Infrastructure"
+
+[profile]
+file = "profile.md"              # personal: role, responsibilities, current focus (see profile.example.md)
+task_catalogue = "tasks.md"     # shared: what belongs to each Odoo task (see tasks.example.md)
+
+[summarizer]
+mode = "auto"                   # auto: claude CLI when available, else simple | claude | simple
+claude_bin = "claude"
+model = ""                      # optional claude model override
+timeout = 180                   # seconds for the claude call
+language = "English"
+max_description_chars = 400
+
+[web]
+host = "127.0.0.1"
+port = 8765
+
+[reminder]
+cron = "0 17 * * 5"             # Friday 17:00
+desktop_notification = true
+open_browser = false            # also open the review page automatically
+notify_when_complete = true     # notify even when nothing is missing
+
+[paths]
+plans_dir = "plans"
+logs_dir = "logs"

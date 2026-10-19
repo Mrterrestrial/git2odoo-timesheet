@@ -1,0 +1,16 @@
+[project]
+name = "git2odoo-timesheet"
+version = "1.0.0"
+description = "Suggest daily Odoo timesheet lines from git history and fill them with one click."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+odoo-timesheet = "odoo_timesheet.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["odoo_timesheet"]
